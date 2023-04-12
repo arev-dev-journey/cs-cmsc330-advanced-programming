@@ -7,5 +7,13 @@ description:
 
 package Project1;
 
-public class IsoscelesTriangle {
+import java.awt.*;
+
+class IsoscelesTriangle extends HollowPolygon {
+    public IsoscelesTriangle(Color color, Point upperLeft, int height, int width) {
+        super(color,3);
+        int[] x_points = {upperLeft.x, upperLeft.x + width, upperLeft.x};
+        int[] y_points = {upperLeft.y, upperLeft.y, upperLeft.y + height};
+        createPolygon(x_points, y_points);
+    }
 }

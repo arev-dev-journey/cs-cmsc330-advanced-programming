@@ -6,8 +6,8 @@ description: This class provides the skeleton parser for project 1
  */
 
 package Project1;
+
 import javax.swing.*;
-import java.awt.Rectangle;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +44,7 @@ class Parser {
     // image -> right_triangle | rectangle
     // right_triangle -> RIGHT_TRIANGLE COLOR number_list AT number_list HEIGHT NUMBER WIDTH NUMBER ';'
     // rectangle -> RECTANGLE_ COLOR number_list AT number_list HEIGHT NUMBER WIDTH NUMBER ';'
-
+    // isosceles -> ISOSCELES COLOR number_list AT number_list HEIGHT NUMBER WIDTH NUMBER ';'
     private void parseImages(Scene scene, Token imageToken) throws LexicalError, SyntaxError, IOException {
         int height, width, offset, radius;
         verifyNextToken(Token.COLOR);
@@ -53,7 +53,7 @@ class Parser {
         verifyNextToken(Token.AT);
         int[] location = getNumberList(2);
         Point point = new Point(location[0], location[1]);
-        if (imageToken == Token.RIGHT_TRIANGLE) {
+        if(imageToken == Token.RIGHT_TRIANGLE) {
             verifyNextToken(Token.HEIGHT);
             verifyNextToken(Token.NUMBER);
             height = lexer.getNumber();
@@ -62,7 +62,7 @@ class Parser {
             width = lexer.getNumber();
             RightTriangle triangle = new RightTriangle(color, point, height, width);
             scene.addImage(triangle);
-        } else if (imageToken == Token.RECTANGLE) {
+        } else if(imageToken == Token.RECTANGLE) {
             verifyNextToken(Token.HEIGHT);
             verifyNextToken(Token.NUMBER);
             height = lexer.getNumber();
@@ -71,13 +71,29 @@ class Parser {
             width = lexer.getNumber();
             Rectangle rectangle = new Rectangle(color, point, height, width);
             scene.addImage(rectangle);
+        } else if(imageToken == Token.ISOSCELES) {
+            verifyNextToken(Token.HEIGHT);
+            verifyNextToken(Token.NUMBER);
+            height = lexer.getNumber();
+            verifyNextToken(Token.WIDTH);
+            verifyNextToken(Token.NUMBER);
+            width = lexer.getNumber();
+            IsoscelesTriangle isoscelesTriangle = new IsoscelesTriangle(color, point, height, width);
+            scene.addImage(isoscelesTriangle);
+        } else if(imageToken == Token.PARALLELOGRAM) {
+            verifyNextToken(Token.OFFSET);
+            verifyNextToken(Token.NUMBER);
+            offset = lexer.getNumber();
+            Parallelogram parallelogram = new Parallelogram(color, point, point, offset);
+            scene.addImage(parallelogram);
         } else {
-             throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
+            throw new SyntaxError(lexer.getLineNo(), "Unexpected image name " + imageToken);
         }
         verifyNextToken(Token.SEMICOLON);
         token = lexer.getNextToken();
-        if (token != Token.END)
+        if(token != Token.END) {
             parseImages(scene, token);
+        }
     }
 
     // Parses the following productions
@@ -87,17 +103,18 @@ class Parser {
 
     // Returns an array of the numbers in the number list
 
-    private int[]  getNumberList(int count) throws LexicalError, SyntaxError, IOException {
+    private int[] getNumberList(int count) throws LexicalError, SyntaxError, IOException {
         int[] list = new int[count];
         verifyNextToken(Token.LEFT_PAREN);
-        for (int i = 0; i < count; i++) {
+        for(int i = 0; i < count; i++) {
             verifyNextToken(Token.NUMBER);
             list[i] = lexer.getNumber();
             token = lexer.getNextToken();
-            if (i < count - 1)
+            if(i < count - 1) {
                 verifyCurrentToken(Token.COMMA);
-            else
+            } else {
                 verifyCurrentToken(Token.RIGHT_PAREN);
+            }
         }
         return list;
     }
@@ -112,10 +129,10 @@ class Parser {
             list.add((int) lexer.getNumber());
             token = lexer.getNextToken();
         }
-        while (token == Token.COMMA);
+        while(token == Token.COMMA);
         verifyCurrentToken(Token.RIGHT_PAREN);
         int[] values = new int[list.size()];
-        for (int i = 0; i < values.length; i++)
+        for(int i = 0; i < values.length; i++)
             values[i] = list.get(i);
         return values;
     }
@@ -130,7 +147,8 @@ class Parser {
     // Verifies that the current token is the expected token
 
     private void verifyCurrentToken(Token expectedToken) throws SyntaxError {
-        if (token != expectedToken)
+        if(token != expectedToken) {
             throw new SyntaxError(lexer.getLineNo(), "Expecting token " + expectedToken + " not " + token);
+        }
     }
 }

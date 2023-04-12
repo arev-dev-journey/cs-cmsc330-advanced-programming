@@ -10,7 +10,7 @@ import java.io.*;
 
 class Lexer {
 
-    private static final int KEYWORDS = 8;
+    private static final int KEYWORDS = 11;
     private StreamTokenizer tokenizer;
     private String punctuation = ",;.()";
     private Token[] punctuationTokens = {Token.COMMA, Token.SEMICOLON, Token.PERIOD, Token.LEFT_PAREN, Token.RIGHT_PAREN };

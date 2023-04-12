@@ -1,11 +1,14 @@
-/*
-author: Alex J. Reveles
-date: 11-APR-2023
-project1
-description:
- */
-
 package Project1;
 
-public class Parallelogram {
+import java.awt.*;
+
+class Parallelogram extends HollowPolygon {
+    public Parallelogram(Color color, Point upperLeft, Point lowerRight, int offset) {
+        super(color, 4);
+        int[] x_points = {upperLeft.x, upperLeft.x + offset, lowerRight.x, lowerRight.x + offset};
+        int[] y_points = {upperLeft.y, upperLeft.y + offset, lowerRight.y, lowerRight.y + offset};
+        createPolygon(x_points, y_points);
+    }
+
+
 }

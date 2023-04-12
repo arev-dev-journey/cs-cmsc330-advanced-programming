@@ -7,5 +7,15 @@ description:
 
 package Project1;
 
-public class Text {
+import java.awt.*;
+
+class Text extends Image {
+    public Text(Color color, Point upperLeft, String msg) {
+        super(color);
+    }
+
+    @Override
+    void draw(Graphics graphics) {
+
+    }
 }
