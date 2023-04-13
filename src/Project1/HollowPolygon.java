@@ -6,6 +6,7 @@ description: Abstract class that defines all hollow polygons
  */
 
 package Project1;
+
 import java.awt.*;
 
 abstract class HollowPolygon extends Polygon_ {

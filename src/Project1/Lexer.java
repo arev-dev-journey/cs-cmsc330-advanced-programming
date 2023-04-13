@@ -6,14 +6,15 @@ description: This class provides the lexical analyzer for project 1
  */
 
 package Project1;
+
 import java.io.*;
 
 class Lexer {
 
-    private static final int KEYWORDS = 11;
+    private static final int KEYWORDS = 23;
     private StreamTokenizer tokenizer;
     private String punctuation = ",;.()";
-    private Token[] punctuationTokens = {Token.COMMA, Token.SEMICOLON, Token.PERIOD, Token.LEFT_PAREN, Token.RIGHT_PAREN };
+    private Token[] punctuationTokens = {Token.COMMA, Token.SEMICOLON, Token.PERIOD, Token.LEFT_PAREN, Token.RIGHT_PAREN};
 
     // Constructor that creates a lexical analyzer object given the source file
 
@@ -27,23 +28,26 @@ class Lexer {
 
     public Token getNextToken() throws LexicalError, IOException {
         int token = tokenizer.nextToken();
-        switch (token) {
+        switch(token) {
             case StreamTokenizer.TT_NUMBER:
                 return Token.NUMBER;
             case StreamTokenizer.TT_WORD:
-                for (Token aToken : Token.values()) {
-                    if (aToken.ordinal() == KEYWORDS)
+                for(Token aToken : Token.values()) {
+                    if(aToken.ordinal() == KEYWORDS) {
                         break;
-                    if (aToken.name().replace("_","").equals(tokenizer.sval.toUpperCase()))
+                    }
+                    if(aToken.name().replace("_", "").equals(tokenizer.sval.toUpperCase())) {
                         return aToken;
+                    }
                 }
                 return Token.IDENTIFIER;
             case StreamTokenizer.TT_EOF:
                 return Token.EOF;
             default:
-                for (int i = 0; i < punctuation.length(); i++)
-                    if (token == punctuation.charAt(i))
+                for(int i = 0; i < punctuation.length(); i++)
+                    if(token == punctuation.charAt(i)) {
                         return punctuationTokens[i];
+                    }
         }
         return Token.EOF;
     }

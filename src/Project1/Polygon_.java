@@ -6,12 +6,13 @@ description: Base class for all polygon classes
  */
 
 package Project1;
+
 import java.awt.*;
 
 class Polygon_ extends Image {
 
     private int vertexCount;
-    private Polygon polygon;
+    protected Polygon polygon;
 
     // Constructor that initializes color and vertexCount of a polygon
 

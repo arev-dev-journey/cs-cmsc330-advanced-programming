@@ -6,6 +6,7 @@ description: Class that defines a hollow rectangle object
  */
 
 package Project1;
+
 import java.awt.*;
 
 class Rectangle extends HollowPolygon {

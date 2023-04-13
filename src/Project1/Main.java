@@ -25,9 +25,9 @@ class Main {
         Scene scene;
         JFileChooser choice = new JFileChooser(new File("."));
         int option = choice.showOpenDialog(null);
-        if (option == JFileChooser.APPROVE_OPTION)
+        if(option == JFileChooser.APPROVE_OPTION) {
             sceneFile = choice.getSelectedFile();
-        else {
+        } else {
             System.out.print("Enter scene file name or a single space to choose file from window: ");
             sceneFileName = stdin.nextLine();
             sceneFile = new File(sceneFileName);
@@ -36,11 +36,11 @@ class Main {
             Parser parser = new Parser(sceneFile);
             scene = parser.parseScene();
             scene.draw();
-        } catch (SyntaxError error) {
+        } catch(SyntaxError error) {
             System.out.println(error.getMessage());
-        } catch (LexicalError error) {
+        } catch(LexicalError error) {
             System.out.println(error.getMessage());
-        } catch (IOException error) {
+        } catch(IOException error) {
             System.out.println("IO Error");
         }
     }

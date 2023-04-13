@@ -6,6 +6,7 @@ description: Abstract base class that defines all image objects
  */
 
 package Project1;
+
 import java.awt.*;
 
 abstract class Image {

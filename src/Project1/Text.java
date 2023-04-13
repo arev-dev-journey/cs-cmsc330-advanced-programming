@@ -2,7 +2,7 @@
 author: Alex J. Reveles
 date: 11-APR-2023
 project1
-description:
+description: Class that defines a text object
  */
 
 package Project1;
@@ -10,12 +10,18 @@ package Project1;
 import java.awt.*;
 
 class Text extends Image {
-    public Text(Color color, Point upperLeft, String msg) {
+    private Point location;
+    private String msg;
+
+    public Text(Color color, Point location, String msg) {
         super(color);
+        this.location = location;
+        this.msg = msg;
     }
 
     @Override
-    void draw(Graphics graphics) {
-
+    public void draw(Graphics graphics) {
+        colorDrawing(graphics);
+        graphics.drawString(msg, location.x, location.y);
     }
 }

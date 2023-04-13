@@ -6,6 +6,7 @@ description: Class that defines a hollow right triangle
  */
 
 package Project1;
+
 import java.awt.*;
 
 class RightTriangle extends HollowPolygon {

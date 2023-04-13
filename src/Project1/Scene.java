@@ -6,6 +6,7 @@ description: Class that defines a scene
  */
 
 package Project1;
+
 import javax.swing.*;
 
 class Scene {

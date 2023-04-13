@@ -1,0 +1,8 @@
+Scene Polygons (600, 600)
+RightTriangle Color (128, 128, 0) at (200, 100) Height 120 Width 280;
+Rectangle Color (0, 255, 0) at (300, 300) Height 150 Width 150;
+Isosceles Color (0, 128, 255) at (450, 150) Height 200 Width 400;
+Parallelogram Color (255, 0, 128) at (100, 400) (300, 500) Offset 50;
+RegularPolygon Color (0, 255, 128) at (500, 400) Sides 7 Radius 100;
+Text Color (255, 115, 255) at (200, 200) "Welcome to Project1!";
+End.
